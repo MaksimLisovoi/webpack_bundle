@@ -3,6 +3,8 @@ const { merge } = require("webpack-merge");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const WebpackBar = require("webpackbar");
+const loadModeConfig = (env) =>
+  require(`./build-utils/${env.mode}.config.js`)(env);
 
 const loadModeConfig = (env) => {
   require(`./build-utils/${env.mode}.config`)(env);
@@ -52,5 +54,5 @@ module.exports = (env) =>
         new WebpackBar(),
       ],
     },
-    loadModeConfig(env)
+    loadModeConfig(env),
   );
